@@ -1,12 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_proyecto/models/productos.dart';
+import 'package:flutter_proyecto/data/models/productos.dart';
+import 'package:flutter_proyecto/data/repositories/ProductoRepository.dart';
 import 'package:flutter_proyecto/services/LogicaProductos.dart';
 import 'package:flutter_proyecto/utils/button_styles.dart';
 import 'package:flutter_proyecto/widgets/drawers.dart';
 //import 'package:image_picker/image_picker.dart';
-
-
 
 class NuevoProducto extends StatefulWidget {
   const NuevoProducto({super.key});
@@ -16,8 +15,8 @@ class NuevoProducto extends StatefulWidget {
 }
 
 class _NuevoProductoState extends State<NuevoProducto> {
-
   final _formKey = GlobalKey<FormState>();
+  final ProductoRepository _productoRepository = ProductoRepository();
   final TextEditingController _nombreController = TextEditingController();
   final TextEditingController _descripcionController = TextEditingController();
   final TextEditingController _stockController = TextEditingController();
@@ -41,7 +40,8 @@ class _NuevoProductoState extends State<NuevoProducto> {
 
   // Método para guardar el producto
   void _guardarProducto() {
-    if (_formKey.currentState!.validate() ) { //&& _imagen != null
+    if (_formKey.currentState!.validate()) {
+      //&& _imagen != null
       final producto = Productos(
         nombre: _nombreController.text,
         descripcion: _descripcionController.text,
@@ -51,7 +51,8 @@ class _NuevoProductoState extends State<NuevoProducto> {
         precio: double.parse(_precioController.text),
       );
 
-      LogicaProductos.anadirProducto(producto);
+      _productoRepository.anadirProducto(producto);
+      // TODO: Agregar sistema para actualizar productos
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Producto agregado correctamente")),
       );
@@ -68,7 +69,7 @@ class _NuevoProductoState extends State<NuevoProducto> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Por favor, selecciona una imagen")),
       );
-    }*/ 
+    }*/
   }
 
   @override
@@ -155,8 +156,10 @@ class _NuevoProductoState extends State<NuevoProducto> {
                 child: Column(
                   children: [
                     _imagen != null
-                        ? Image.file(_imagen!, height: 100, width: 100, fit: BoxFit.cover)
-                        : const Icon(Icons.image, size: 100, color: Colors.grey),
+                        ? Image.file(_imagen!,
+                            height: 100, width: 100, fit: BoxFit.cover)
+                        : const Icon(Icons.image,
+                            size: 100, color: Colors.grey),
                     TextButton.icon(
                       onPressed: _seleccionarImagen,
                       icon: const Icon(Icons.add_a_photo),
@@ -174,12 +177,14 @@ class _NuevoProductoState extends State<NuevoProducto> {
                       onPressed: _guardarProducto,
                       child: const Text("Guardar Producto"),
                     ),
-                    const SizedBox(height: 20,),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     ElevatedButton(
                       style: CustomButtonStyles.botonesDefecto,
                       onPressed: () {
                         Navigator.pop(context);
-                      }, 
+                      },
                       child: const Text("Volver"),
                     ),
                   ],

@@ -1,7 +1,8 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter_proyecto/models/pedidos.dart';
-import 'package:flutter_proyecto/models/productos.dart';
+import 'package:flutter_proyecto/data/models/pedidos.dart';
+import 'package:flutter_proyecto/data/models/productos.dart';
+import 'package:flutter_proyecto/data/repositories/ProductoRepository.dart';
 import 'package:flutter_proyecto/services/LogicaPedidos.dart';
 import 'package:flutter_proyecto/services/LogicaProductos.dart';
 
@@ -81,9 +82,10 @@ class _PantallaComprasState extends State<PantallaCompras> {
   }
 
   void _procesarCompra() {
-    setState(() {
+    final ProductoRepository productoRepository = ProductoRepository();
+    setState(() async {
       List<Productos> listaProductos =
-          LogicaProductos.getListaProductos() as List<Productos>;
+          await productoRepository.getListaProductos();
       cantidades.forEach((index, cantidad) {
         if (cantidad > 0) {
           // Restamos el stock del producto comprado
@@ -116,7 +118,7 @@ class _PantallaComprasState extends State<PantallaCompras> {
   @override
   Widget build(BuildContext context) {
     List<Productos> todosProductos =
-        LogicaProductos.getListaProductos() as List<Productos>;
+        ProductoRepository().getListaProductos() as List<Productos>;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(

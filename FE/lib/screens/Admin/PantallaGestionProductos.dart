@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_proyecto/models/productos.dart';
+import 'package:flutter_proyecto/data/models/productos.dart';
+import 'package:flutter_proyecto/data/repositories/ProductoRepository.dart';
 import 'package:flutter_proyecto/screens/Admin/PantallaNuevoProducto.dart';
 import 'package:flutter_proyecto/services/LogicaProductos.dart';
 import 'package:flutter_proyecto/utils/button_styles.dart';
@@ -14,6 +15,7 @@ class PantallaProductos extends StatefulWidget {
 
 class _PantallaProductosState extends State<PantallaProductos> {
   List<Productos> todosProductos = [];
+  final ProductoRepository _productoRepository = ProductoRepository();
   void _eliminarProducto(int index) {
     setState(() {
       //LogicaProductos.getListaProductos().removeAt(index);
@@ -33,7 +35,7 @@ class _PantallaProductosState extends State<PantallaProductos> {
   @override
   void initState() {
     super.initState();
-    LogicaProductos.getListaProductos().then((result) {
+    _productoRepository.getListaProductos().then((result) {
       setState(() {
         todosProductos = result; // Update state when data is loaded
       });
@@ -42,7 +44,6 @@ class _PantallaProductosState extends State<PantallaProductos> {
 
   @override
   Widget build(BuildContext context) {
-    //List<Productos> todosProductos = LogicaProductos.getListaProductos();
     return Scaffold(
       drawer: const DrawerGeneral(),
       appBar: AppBar(

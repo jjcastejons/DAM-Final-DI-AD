@@ -1,4 +1,4 @@
-import 'package:flutter_proyecto/models/productos.dart';
+import 'package:flutter_proyecto/data/models/productos.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -31,26 +31,26 @@ class LogicaProductos {
   }
 
   // Método para obtener la lista de productos
-  static Future<List<Productos>> getListaProductos() {
-    //return _listaProductos;
-    return apiRequest('getall');
-  }
+  // static Future<List<Productos>> getListaProductos() {
+  //   //return _listaProductos;
+  //   return apiRequest('getall');
+  // }
 
-  // TODO: Hay que pasar esta lógica a un servicio genérico que llame a la API
-  static Future<List<Productos>> apiRequest(String path) async {
-    final url = Uri.parse('http://localhost:8080/api/v1/products/$path');
-    try {
-      final response = await http.get(url);
-      if (response.statusCode == 200) {
-        List<dynamic> jsonList = jsonDecode(response.body);
-        List<Productos> productos =
-            jsonList.map((json) => Productos.fromJson(json)).toList();
-        return productos;
-      }
-    } catch (e) {
-      // Error conexión API
-      print("error");
-    }
-    return [];
-  }
+  // // TODO: Hay que pasar esta lógica a un servicio genérico que llame a la API
+  // static Future<List<Productos>> apiRequest(String path) async {
+  //   final url = Uri.parse('http://localhost:8080/api/v1/products/$path');
+  //   try {
+  //     final response = await http.get(url);
+  //     if (response.statusCode == 200) {
+  //       List<dynamic> jsonList = jsonDecode(response.body);
+  //       List<Productos> productos =
+  //           jsonList.map((json) => Productos.fromJson(json)).toList();
+  //       return productos;
+  //     }
+  //   } catch (e) {
+  //     // Error conexión API
+  //     print("error");
+  //   }
+  //   return [];
+  // }
 }

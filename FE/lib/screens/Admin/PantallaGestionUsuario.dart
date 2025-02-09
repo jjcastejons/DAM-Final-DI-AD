@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_proyecto/models/user.dart';
+import 'package:flutter_proyecto/data/models/user.dart';
+import 'package:flutter_proyecto/data/repositories/UsuarioRepository.dart';
 import 'package:flutter_proyecto/screens/Admin/PantallaRegistroAdmin.dart';
 import 'package:flutter_proyecto/services/LogicaUsuarios.dart';
 import 'package:flutter_proyecto/utils/button_styles.dart';
@@ -37,8 +38,9 @@ class _PantallaGestionUsersState extends State<PantallaGestionUsers> {
 
   @override
   Widget build(BuildContext context) {
+    final UsuarioRepository _usuarioRepository = UsuarioRepository();
     dynamic todosUsuarios;
-    LogicaUsuarios.getListaUsuarios().then((data) => todosUsuarios = data);
+    _usuarioRepository.getListaUsuarios().then((data) => todosUsuarios = data);
     return Scaffold(
       drawer: const DrawerGeneral(),
       appBar: AppBar(

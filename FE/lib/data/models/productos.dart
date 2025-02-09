@@ -42,7 +42,7 @@ class Productos {
     stock = stock;
   }
 
-  // Convierte un JSON a un objeto User
+  // Convierte un JSON a un objeto Productos
   factory Productos.fromJson(Map<String, dynamic> json) {
     return Productos(
         nombre: json['nombre'] ?? '',
@@ -50,5 +50,16 @@ class Productos {
         imagenPath: json['imagenPath'] ?? '',
         stock: json['stock'] ?? 0,
         precio: json['precio'] ?? 0.0);
+  }
+
+  // Objeto Productos a JSON
+  Map<String, dynamic> toJson() {
+    return {
+      "nombre": nombre,
+      "descripcion": descripcion,
+      "imagenPath": imagenPath,
+      "stock": stock,
+      "precio": precio,
+    };
   }
 }

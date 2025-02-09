@@ -58,4 +58,16 @@ class User {
       administrador: json['administrador'] ?? false,
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "nombre": nombre,
+      "contrasena": contrasena,
+      "contrasena2": contrasena2,
+      "imagen": imagen,
+      "edad": edad,
+      "lugarNacimiento": lugarNacimiento,
+      "administrador": administrador,
+    };
+  }
 }

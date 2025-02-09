@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_proyecto/models/user.dart';
+import 'package:flutter_proyecto/data/models/user.dart';
+import 'package:flutter_proyecto/data/repositories/UsuarioRepository.dart';
 import 'package:flutter_proyecto/screens/Admin/PantallaAdmin.dart';
 import 'package:flutter_proyecto/screens/Usuario/PantallaUsuario.dart';
 import 'package:flutter_proyecto/screens/Login/PantallaRegistro.dart';
@@ -16,19 +17,18 @@ class PantallaInicioSesion extends StatefulWidget {
 class _PantallaPrincipal extends State<PantallaInicioSesion> {
   //final _formKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final UsuarioRepository _usuarioRepository = UsuarioRepository();
   String text = "Esta es mi pantalla principal";
   String _nombre = '';
   String _contrasena = '';
   bool cambiado = true;
-  //final listaUsuarios = LogicaUsuarios.getListaUsuarios();
 
   Future<void> _pantallaInicio() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
     }
 
-    //dynamic listaUsuarios;
-    final listaUsuarios = await LogicaUsuarios.getListaUsuarios();
+    final listaUsuarios = await _usuarioRepository.getListaUsuarios();
 
     for (User miUsuario in listaUsuarios) {
       if (miUsuario.getNombre() == _nombre &&
@@ -98,6 +98,7 @@ class _PantallaPrincipal extends State<PantallaInicioSesion> {
   }
 
   void _mostrarDialogoRecuperacion(BuildContext context) {
+    final UsuarioRepository _usuarioRepository = UsuarioRepository();
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -130,7 +131,8 @@ class _PantallaPrincipal extends State<PantallaInicioSesion> {
               onPressed: () {
                 Navigator.of(context).pop();
                 dynamic listaUsuarios;
-                LogicaUsuarios.getListaUsuarios()
+                _usuarioRepository
+                    .getListaUsuarios()
                     .then((data) => listaUsuarios = data);
                 for (User miUsuario in listaUsuarios) {
                   if (miUsuario.getNombre() == nombreRecuperado.toString()) {

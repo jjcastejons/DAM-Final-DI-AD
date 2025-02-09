@@ -1,15 +1,14 @@
-import 'package:flutter_proyecto/models/pedidos.dart';
+import 'package:flutter_proyecto/data/models/pedidos.dart';
 
 class LogicaPedidos {
   // Lista estática para almacenar los pedidos
   static final List<Pedidos> _listaPedidos = [
     Pedidos(
-      comprador: "Admin",
-      numeroPedido: 00001,
-      descripcion: "Este es un pedido de prueba",
-      estado: "Pedido",
-      precio: 19.99
-    ),
+        comprador: "Admin",
+        numeroPedido: 00001,
+        descripcion: "Este es un pedido de prueba",
+        estado: "Pedido",
+        precio: 19.99),
   ];
 
   // Método para añadir un pedido a la lista
