@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_proyecto/data/models/user.dart';
 import 'package:flutter_proyecto/data/repositories/UsuarioRepository.dart';
+import 'package:flutter_proyecto/providers/UsuarioProvider.dart';
 import 'package:flutter_proyecto/screens/Admin/PantallaAdmin.dart';
 import 'package:flutter_proyecto/screens/Usuario/PantallaUsuario.dart';
 import 'package:flutter_proyecto/screens/Login/PantallaRegistro.dart';
 import 'package:flutter_proyecto/services/LogicaUsuarios.dart';
 import 'package:flutter_proyecto/utils/button_styles.dart';
+import 'package:provider/provider.dart';
 
 class PantallaInicioSesion extends StatefulWidget {
   const PantallaInicioSesion({super.key});
@@ -17,18 +19,18 @@ class PantallaInicioSesion extends StatefulWidget {
 class _PantallaPrincipal extends State<PantallaInicioSesion> {
   //final _formKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final UsuarioRepository _usuarioRepository = UsuarioRepository();
   String text = "Esta es mi pantalla principal";
   String _nombre = '';
   String _contrasena = '';
   bool cambiado = true;
 
   Future<void> _pantallaInicio() async {
+    final usuarioProvider =
+        Provider.of<UsuarioProvider>(context, listen: false);
+    List<User> listaUsuarios = await usuarioProvider.fetchListaUsuarios();
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
     }
-
-    final listaUsuarios = await _usuarioRepository.getListaUsuarios();
 
     for (User miUsuario in listaUsuarios) {
       if (miUsuario.getNombre() == _nombre &&
@@ -98,7 +100,7 @@ class _PantallaPrincipal extends State<PantallaInicioSesion> {
   }
 
   void _mostrarDialogoRecuperacion(BuildContext context) {
-    final UsuarioRepository _usuarioRepository = UsuarioRepository();
+    final usuarioProvider = Provider.of<UsuarioProvider>(context);
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -130,11 +132,7 @@ class _PantallaPrincipal extends State<PantallaInicioSesion> {
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pop();
-                dynamic listaUsuarios;
-                _usuarioRepository
-                    .getListaUsuarios()
-                    .then((data) => listaUsuarios = data);
-                for (User miUsuario in listaUsuarios) {
+                for (User miUsuario in usuarioProvider.usuarios) {
                   if (miUsuario.getNombre() == nombreRecuperado.toString()) {
                     String contrasenaRacuperada = miUsuario.getPass();
                     _mostrarContrasena(context, nombreRecuperado.toString(),

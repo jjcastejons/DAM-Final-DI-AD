@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_proyecto/data/models/user.dart';
-import 'package:flutter_proyecto/data/repositories/UsuarioRepository.dart';
+import 'package:flutter_proyecto/providers/UsuarioProvider.dart';
 import 'package:flutter_proyecto/screens/Admin/PantallaRegistroAdmin.dart';
-import 'package:flutter_proyecto/services/LogicaUsuarios.dart';
 import 'package:flutter_proyecto/utils/button_styles.dart';
 import 'package:flutter_proyecto/widgets/drawers.dart';
+import 'package:provider/provider.dart';
 
 class PantallaGestionUsers extends StatefulWidget {
   const PantallaGestionUsers({super.key});
@@ -38,9 +38,7 @@ class _PantallaGestionUsersState extends State<PantallaGestionUsers> {
 
   @override
   Widget build(BuildContext context) {
-    final UsuarioRepository _usuarioRepository = UsuarioRepository();
-    dynamic todosUsuarios;
-    _usuarioRepository.getListaUsuarios().then((data) => todosUsuarios = data);
+    final usuarioProvider = Provider.of<UsuarioProvider>(context);
     return Scaffold(
       drawer: const DrawerGeneral(),
       appBar: AppBar(
@@ -53,12 +51,12 @@ class _PantallaGestionUsersState extends State<PantallaGestionUsers> {
           children: [
             const SizedBox(height: 20),
             // Verificar si hay productos
-            todosUsuarios.isEmpty
+            usuarioProvider.usuarios.isEmpty
                 ? const Center(
                     child: Text("No se ha encontrado ningún producto."))
                 : Expanded(
                     child: ListView.builder(
-                      itemCount: todosUsuarios.length,
+                      itemCount: usuarioProvider.usuarios.length,
                       itemBuilder: (context, index) {
                         return Card(
                           elevation: 4,
@@ -75,7 +73,8 @@ class _PantallaGestionUsersState extends State<PantallaGestionUsers> {
                               const Icon(Icons.image, size: 50),
                           ),
                           */
-                            title: Text(todosUsuarios[index].getNombre()),
+                            title: Text(
+                                usuarioProvider.usuarios[index].getNombre()),
                             trailing: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
@@ -83,16 +82,16 @@ class _PantallaGestionUsersState extends State<PantallaGestionUsers> {
                                   icon: const Icon(Icons.edit,
                                       color: Colors.blue),
                                   onPressed: () {
-                                    _editarUsuario(
-                                        context, todosUsuarios[index], index);
+                                    _editarUsuario(context,
+                                        usuarioProvider.usuarios[index], index);
                                   },
                                 ),
                                 IconButton(
                                   icon: const Icon(Icons.block,
                                       color: Colors.black),
                                   onPressed: () {
-                                    _bloquearUsuario(
-                                        context, todosUsuarios[index], index);
+                                    _bloquearUsuario(context,
+                                        usuarioProvider.usuarios[index], index);
                                   },
                                 ),
                                 IconButton(

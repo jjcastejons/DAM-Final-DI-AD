@@ -1,21 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_proyecto/providers/ProductoProvider.dart';
+import 'package:flutter_proyecto/providers/UsuarioProvider.dart';
 import 'screens/Login/PantallaInicioSesion.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+            create: (context) => UsuarioProvider()..fetchUsuarios()),
+        ChangeNotifierProvider(
+            create: (context) => ProductoProvider()..fetchProductos()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color.fromARGB(255, 91, 155, 207)),
+          seedColor: const Color.fromARGB(255, 91, 155, 207),
+        ),
         useMaterial3: true,
       ),
       home: const PantallaInicioSesion(),
