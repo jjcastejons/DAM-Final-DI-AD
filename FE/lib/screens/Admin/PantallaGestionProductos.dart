@@ -78,7 +78,8 @@ class _PantallaProductosState extends State<PantallaProductos> {
                                       icon: const Icon(Icons.delete,
                                           color: Colors.red),
                                       onPressed: () {
-                                        _eliminarProducto(index);
+                                        productoProvider
+                                            .deleteProducto(producto.id);
                                       },
                                     ),
                                   ],

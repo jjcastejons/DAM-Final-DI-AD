@@ -5,7 +5,6 @@ import 'package:flutter_proyecto/providers/UsuarioProvider.dart';
 import 'package:flutter_proyecto/screens/Admin/PantallaAdmin.dart';
 import 'package:flutter_proyecto/screens/Usuario/PantallaUsuario.dart';
 import 'package:flutter_proyecto/screens/Login/PantallaRegistro.dart';
-import 'package:flutter_proyecto/services/LogicaUsuarios.dart';
 import 'package:flutter_proyecto/utils/button_styles.dart';
 import 'package:provider/provider.dart';
 

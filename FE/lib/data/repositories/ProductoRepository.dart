@@ -24,7 +24,7 @@ class ProductoRepository {
     await _apiService.dio.put("/products/$id", data: productos.toJson());
   }
 
-  Future<void> eliminarProducto(String id) async {
+  Future<void> eliminarProducto(int id) async {
     await _apiService.dio.delete("/products/$id");
   }
 }

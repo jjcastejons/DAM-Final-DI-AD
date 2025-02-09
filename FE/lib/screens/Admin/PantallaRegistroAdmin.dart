@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_proyecto/data/models/user.dart';
+import 'package:flutter_proyecto/providers/UsuarioProvider.dart';
 import 'package:flutter_proyecto/screens/Admin/PantallaGestionUsuario.dart';
-import 'package:flutter_proyecto/services/LogicaUsuarios.dart';
 import 'package:flutter_proyecto/utils/button_styles.dart';
+import 'package:provider/provider.dart';
 
 class PantallaRegistroAdmin extends StatefulWidget {
   const PantallaRegistroAdmin({super.key});
@@ -40,8 +41,9 @@ class _PantallaRegistroAdminState extends State<PantallaRegistroAdmin> {
       administrador: _aceptaTerminos,
     );
 
-    print(usuario);
-    LogicaUsuarios.anadirUsuario(usuario);
+    final usuarioProvider =
+        Provider.of<UsuarioProvider>(context, listen: false);
+    usuarioProvider.addUsuario(usuario);
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Usuario guardado correctamente')),

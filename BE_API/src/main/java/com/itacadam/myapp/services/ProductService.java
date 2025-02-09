@@ -26,6 +26,10 @@ public class ProductService {
         return productRepository.save(mapToProduct(productCreationRequest));
     }
 
+    public void removeProduct(Long id) {
+        productRepository.deleteById(id);
+    }
+
     private Product mapToProduct(ProductCreationRequest createRequest) {
         Product product = new Product();
         product.setNombre(createRequest.nombre());

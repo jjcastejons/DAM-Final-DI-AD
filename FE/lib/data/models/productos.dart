@@ -1,4 +1,5 @@
 class Productos {
+  final int id;
   final String nombre;
   final String descripcion;
   final String imagenPath;
@@ -6,6 +7,7 @@ class Productos {
   final double precio;
 
   Productos({
+    required this.id,
     required this.nombre,
     required this.descripcion,
     required this.imagenPath,
@@ -15,7 +17,11 @@ class Productos {
 
   @override
   String toString() {
-    return 'Productos(nombre: $nombre, descripcion: $descripcion, imagen: $imagenPath, stock: $stock)';
+    return 'Productos(id: $id, nombre: $nombre, descripcion: $descripcion, imagen: $imagenPath, stock: $stock)';
+  }
+
+  int getId() {
+    return id;
   }
 
   String getNombre() {
@@ -45,6 +51,7 @@ class Productos {
   // Convierte un JSON a un objeto Productos
   factory Productos.fromJson(Map<String, dynamic> json) {
     return Productos(
+        id: json['id'] ?? 0,
         nombre: json['nombre'] ?? '',
         descripcion: json['descripcion'] ?? '',
         imagenPath: json['imagenPath'] ?? '',
@@ -55,6 +62,7 @@ class Productos {
   // Objeto Productos a JSON
   Map<String, dynamic> toJson() {
     return {
+      "id": id,
       "nombre": nombre,
       "descripcion": descripcion,
       "imagenPath": imagenPath,

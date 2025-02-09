@@ -1,10 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_proyecto/data/models/productos.dart';
-import 'package:flutter_proyecto/data/repositories/ProductoRepository.dart';
 import 'package:flutter_proyecto/providers/ProductoProvider.dart';
-import 'package:flutter_proyecto/providers/UsuarioProvider.dart';
-import 'package:flutter_proyecto/services/LogicaProductos.dart';
 import 'package:flutter_proyecto/utils/button_styles.dart';
 import 'package:flutter_proyecto/widgets/drawers.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +16,6 @@ class NuevoProducto extends StatefulWidget {
 
 class _NuevoProductoState extends State<NuevoProducto> {
   final _formKey = GlobalKey<FormState>();
-  //final ProductoRepository _productoRepository = ProductoRepository();
   final TextEditingController _nombreController = TextEditingController();
   final TextEditingController _descripcionController = TextEditingController();
   final TextEditingController _stockController = TextEditingController();
@@ -48,6 +44,7 @@ class _NuevoProductoState extends State<NuevoProducto> {
           Provider.of<ProductoProvider>(context, listen: false);
 
       final producto = Productos(
+        id: 0,
         nombre: _nombreController.text,
         descripcion: _descripcionController.text,
         //imagenPath: _imagen!.path,

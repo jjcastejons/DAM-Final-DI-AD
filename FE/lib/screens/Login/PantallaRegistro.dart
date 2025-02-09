@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_proyecto/data/models/user.dart';
-import 'package:flutter_proyecto/services/LogicaUsuarios.dart';
+import 'package:flutter_proyecto/providers/UsuarioProvider.dart';
 import 'package:flutter_proyecto/utils/button_styles.dart';
+import 'package:provider/provider.dart';
 
 class PantallaRegistro extends StatefulWidget {
   const PantallaRegistro({super.key});
@@ -39,8 +40,9 @@ class _PantallaRegistroState extends State<PantallaRegistro> {
       administrador: false,
     );
 
-    print(usuario);
-    LogicaUsuarios.anadirUsuario(usuario);
+    final usuarioProvider =
+        Provider.of<UsuarioProvider>(context, listen: false);
+    usuarioProvider.addUsuario(usuario);
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Usuario guardado correctamente')),

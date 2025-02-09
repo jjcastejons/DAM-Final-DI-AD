@@ -4,7 +4,6 @@ import 'package:flutter_proyecto/data/models/pedidos.dart';
 import 'package:flutter_proyecto/data/models/productos.dart';
 import 'package:flutter_proyecto/data/repositories/ProductoRepository.dart';
 import 'package:flutter_proyecto/services/LogicaPedidos.dart';
-import 'package:flutter_proyecto/services/LogicaProductos.dart';
 
 class PantallaCompras extends StatefulWidget {
   const PantallaCompras({super.key, required this.nombreUsuario});

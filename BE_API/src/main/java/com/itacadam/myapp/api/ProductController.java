@@ -25,8 +25,13 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public Product getBand(@PathVariable long id) {
+    public Product getProduct(@PathVariable long id) {
         return productService.getProduct(id).orElse(null);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteProduct(@PathVariable long id) {
+        productService.removeProduct(id);
     }
 
 

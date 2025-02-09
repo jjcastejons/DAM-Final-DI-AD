@@ -23,7 +23,7 @@ class ProductoProvider with ChangeNotifier {
     fetchProductos();
   }
 
-  Future<void> deleteProducto(String id) async {
+  Future<void> deleteProducto(int id) async {
     await _productoRepository.eliminarProducto(id);
     fetchProductos();
   }
