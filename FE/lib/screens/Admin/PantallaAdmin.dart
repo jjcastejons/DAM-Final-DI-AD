@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_proyecto/screens/Admin/PantallaGestionPedidos.dart';
 import 'package:flutter_proyecto/screens/Admin/PantallaGestionProductos.dart';
 import 'package:flutter_proyecto/screens/Admin/PantallaGestionUsuario.dart';
 import 'package:flutter_proyecto/screens/Login/PantallaInicioSesion.dart';
@@ -68,7 +69,12 @@ class _PantallaSecundaria extends State<PantallaAdmin> {
             ),
             ElevatedButton.icon(
               style: CustomButtonStyles.botonesDefecto,
-              onPressed: _pantallaPrincipal,
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const GestionPedidos()));
+              },
               label: const Text("Gestión de Pedidos"),
               icon: const Icon(Icons.shopping_cart),
             ),
