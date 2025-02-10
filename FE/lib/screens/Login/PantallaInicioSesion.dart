@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_proyecto/data/models/user.dart';
-import 'package:flutter_proyecto/data/repositories/UsuarioRepository.dart';
 import 'package:flutter_proyecto/providers/UsuarioProvider.dart';
 import 'package:flutter_proyecto/screens/Admin/PantallaAdmin.dart';
 import 'package:flutter_proyecto/screens/Usuario/PantallaUsuario.dart';

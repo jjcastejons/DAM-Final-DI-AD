@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flutter_proyecto/data/models/productos.dart';
 import 'package:flutter_proyecto/data/services/ApiService.dart';
 

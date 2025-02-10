@@ -5,24 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch Chrome",
-            "request": "launch",
-            "type": "chrome",
-            "url": "http://localhost:8080",
-            "webRoot": "${workspaceFolder}"
-        },
-        {
             "type": "java",
-            "name": "Current File",
+            "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
         },
         {
-            "type": "java",
-            "name": "MyappApplication",
+            "name": "FE (Flutter Chrome)",
+            "program": "lib/main.dart",
+            "cwd": "FE",
+            "deviceId": "chrome",
             "request": "launch",
-            "mainClass": "com.itacadam.myapp.MyappApplication",
-            "projectName": "myapp"
+            "type": "dart"
         }
     ]
 }
