@@ -40,6 +40,12 @@ A continuación, se dispone de un ejemplo de configuración para poder realizar 
 
 # Arquitectura de la solución 
 Pendiente de implementar (representación Flutter/Dart + API Spring WEB + ORM Hibernate + MySQL)
+## Flutter
+Para manejar múltiples controladores con distintos tipos de peticiones, se va a utilizar usar Dio + Repository Pattern + Provider
+![](doc/images/DioReposProvider.png)
+De esta manera va a ser más eficiente la gestión del flujo REST y, una vez comprendida la estructura, simplificará la implementación de nuevos elementos.
+
+
   
 # Despliegue contenedores (Docker)
 Pendiente de implementar
