@@ -24,7 +24,7 @@ class UsuarioRepository {
     await _apiService.dio.put("/users/$id", data: user.toJson());
   }
 
-  Future<void> eliminarUsuario(String id) async {
+  Future<void> eliminarUsuario(int id) async {
     await _apiService.dio.delete("/users/$id");
   }
 }

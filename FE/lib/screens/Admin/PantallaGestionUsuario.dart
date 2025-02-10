@@ -98,7 +98,8 @@ class _PantallaGestionUsersState extends State<PantallaGestionUsers> {
                                   icon: const Icon(Icons.delete,
                                       color: Colors.red),
                                   onPressed: () {
-                                    // _eliminarUsuario(index);
+                                    usuarioProvider.deleteUsuario(
+                                        usuarioProvider.usuarios[index].id);
                                   },
                                 ),
                               ],

@@ -102,6 +102,19 @@ class _PantallaProductosState extends State<PantallaProductos> {
                   },
                   child: const Text("Añadir producto"),
                 ),
+                const SizedBox(
+                  height: 20,
+                ),
+                ElevatedButton(
+                  style: CustomButtonStyles.botonesDefecto,
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text("Volver"),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
               ],
             ),
           );

@@ -1,4 +1,5 @@
 class User {
+  final int id;
   final String nombre;
   final String contrasena;
   final String contrasena2;
@@ -8,6 +9,7 @@ class User {
   final bool administrador;
 
   User({
+    required this.id,
     required this.nombre,
     required this.contrasena,
     required this.contrasena2,
@@ -20,6 +22,10 @@ class User {
   @override
   String toString() {
     return 'User(nombre: $nombre, contrasena: $contrasena, contrasena2: $contrasena2)';
+  }
+
+  int getId() {
+    return id;
   }
 
   String getNombre() {
@@ -49,6 +55,7 @@ class User {
   // Convierte un JSON a un objeto User
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
+      id: json['id'] ?? 0,
       nombre: json['nombre'] ?? '',
       contrasena: json['contrasena'] ?? '',
       contrasena2: json['contrasena2'] ?? '',
@@ -61,6 +68,7 @@ class User {
 
   Map<String, dynamic> toJson() {
     return {
+      "id": id,
       "nombre": nombre,
       "contrasena": contrasena,
       "contrasena2": contrasena2,

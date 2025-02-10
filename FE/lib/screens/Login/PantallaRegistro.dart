@@ -31,6 +31,7 @@ class _PantallaRegistroState extends State<PantallaRegistro> {
 
     // Crear un objeto User
     User usuario = User(
+      id: 0,
       nombre: _nombre,
       contrasena: _contrasena,
       contrasena2: _contrasena2,

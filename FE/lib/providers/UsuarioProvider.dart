@@ -27,7 +27,7 @@ class UsuarioProvider with ChangeNotifier {
     fetchUsuarios();
   }
 
-  Future<void> deleteUsuario(String id) async {
+  Future<void> deleteUsuario(int id) async {
     await _usuarioRepository.eliminarUsuario(id);
     fetchUsuarios();
   }

@@ -23,7 +23,7 @@ class _PantallaRegistroAdminState extends State<PantallaRegistroAdmin> {
   final TextEditingController _edadController = TextEditingController();
   bool _aceptaTerminos = false;
 
-  void _acepatar() {
+  void _aceptar() {
     //Navigator.pop(context);
     if (_formKey.currentState!.validate()) {
       // Process data.
@@ -32,6 +32,7 @@ class _PantallaRegistroAdminState extends State<PantallaRegistroAdmin> {
 
     // Crear un objeto User
     User usuario = User(
+      id: 0,
       nombre: _nombre,
       contrasena: _contrasena,
       contrasena2: _contrasena2,
@@ -261,7 +262,7 @@ class _PantallaRegistroAdminState extends State<PantallaRegistroAdmin> {
                 ),
                 ElevatedButton(
                     style: CustomButtonStyles.botonesDefecto,
-                    onPressed: _acepatar,
+                    onPressed: _aceptar,
                     child: const Text("Aceptar")),
                 const SizedBox(
                   height: 20,

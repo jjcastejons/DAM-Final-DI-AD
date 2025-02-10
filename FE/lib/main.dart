@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_proyecto/providers/PedidoProvider.dart';
 import 'package:flutter_proyecto/providers/ProductoProvider.dart';
 import 'package:flutter_proyecto/providers/UsuarioProvider.dart';
 import 'screens/Login/PantallaInicioSesion.dart';
@@ -12,6 +13,8 @@ void main() {
             create: (context) => UsuarioProvider()..fetchUsuarios()),
         ChangeNotifierProvider(
             create: (context) => ProductoProvider()..fetchProductos()),
+        ChangeNotifierProvider(
+            create: (context) => PedidoProvider()..fetchPedidos()),
       ],
       child: const MyApp(),
     ),

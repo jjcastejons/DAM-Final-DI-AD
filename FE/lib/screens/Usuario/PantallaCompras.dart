@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_proyecto/data/models/pedidos.dart';
 import 'package:flutter_proyecto/data/models/productos.dart';
 import 'package:flutter_proyecto/data/repositories/ProductoRepository.dart';
-import 'package:flutter_proyecto/services/LogicaPedidos.dart';
+import 'package:flutter_proyecto/providers/PedidoProvider.dart';
+import 'package:provider/provider.dart';
+
+import '../../providers/ProductoProvider.dart';
 
 class PantallaCompras extends StatefulWidget {
   const PantallaCompras({super.key, required this.nombreUsuario});
@@ -18,7 +21,7 @@ class _PantallaComprasState extends State<PantallaCompras> {
   // Usamos un mapa para almacenar la cantidad seleccionada de cada producto.
   Map<int, int> cantidades = {};
   String _mensajeCompra = "";
-  double _precioTotal = 0.0;
+  final double _precioTotal = 0.0;
 
   // Método para modificar la cantidad (aumentar o disminuir)
   void _modificarCantidad(int index, int cambio) {
@@ -80,15 +83,16 @@ class _PantallaComprasState extends State<PantallaCompras> {
     );
   }
 
+  // TODO: Verificar que llamadas asíncronas funcionen correctamente.  Es muy probable que haya que trabajar con Consumer ya que no hay ningún await
   void _procesarCompra() {
-    final ProductoRepository productoRepository = ProductoRepository();
+    final productoProvider =
+        Provider.of<ProductoProvider>(context, listen: false);
+    final pedidoProvider = Provider.of<PedidoProvider>(context, listen: false);
     setState(() async {
-      List<Productos> listaProductos =
-          await productoRepository.getListaProductos();
       cantidades.forEach((index, cantidad) {
         if (cantidad > 0) {
           // Restamos el stock del producto comprado
-          Productos miProducto = listaProductos[index];
+          Productos miProducto = productoProvider.productos[index];
           miProducto.setStock(miProducto.stock - cantidad);
         }
       });
@@ -106,7 +110,7 @@ class _PantallaComprasState extends State<PantallaCompras> {
       descripcion: _mensajeCompra,
     );
 
-    LogicaPedidos.anadirPedido(pedido);
+    pedidoProvider.addPedido(pedido);
 
     // Mostrar mensaje de éxito
     ScaffoldMessenger.of(context).showSnackBar(
