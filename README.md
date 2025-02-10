@@ -1,4 +1,4 @@
-# DAMFinal
+# DAM - Proyecto final DI y AD
 El siguiente repositorio contiene en una versión demo del proyecto final para el alumnado de DAM que tendrán que crear una interfaz de usuario con la tecnología Flutter/Dart que conecta al backend con lenguaje Java y Springboot.
 
 
