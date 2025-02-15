@@ -19,7 +19,7 @@ class PedidoProvider with ChangeNotifier {
     fetchPedidos();
   }
 
-  Future<void> updatePedido(String id, Pedidos pedido) async {
+  Future<void> updatePedido(int id, Pedidos pedido) async {
     await _pedidoRepository.actualizarPedido(id, pedido);
     fetchPedidos();
   }

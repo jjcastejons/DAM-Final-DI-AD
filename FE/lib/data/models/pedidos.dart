@@ -34,6 +34,10 @@ class Pedidos {
     return estado;
   }
 
+  void setEstado(String estado) {
+    estado = estado;
+  }
+
   String getComprador() {
     return comprador;
   }
@@ -41,7 +45,7 @@ class Pedidos {
   // Convierte un JSON a un objeto Pedidos
   factory Pedidos.fromJson(Map<String, dynamic> json) {
     return Pedidos(
-        numeroPedido: json['numeroPedido'] ?? '',
+        numeroPedido: json['numeroPedido'] ?? 0,
         descripcion: json['descripcion'] ?? '',
         precio: json['precio'] ?? 0.0,
         estado: json['estado'] ?? '',

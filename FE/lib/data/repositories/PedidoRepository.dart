@@ -20,7 +20,7 @@ class PedidoRepository {
     await _apiService.dio.post("/orders", data: pedidos.toJson());
   }
 
-  Future<void> actualizarPedido(String id, Pedidos pedidos) async {
+  Future<void> actualizarPedido(int id, Pedidos pedidos) async {
     await _apiService.dio.put("/orders/$id", data: pedidos.toJson());
   }
 
