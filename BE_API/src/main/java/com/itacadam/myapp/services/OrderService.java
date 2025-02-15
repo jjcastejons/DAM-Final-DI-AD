@@ -9,7 +9,7 @@ import com.itacadam.myapp.models.Order;
 import com.itacadam.myapp.repository.OrderRepository;
 import com.itacadam.myapp.repository.ProductRepository;
 
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,8 +46,12 @@ public class OrderService {
     }
 
     public List<Order> getAllOrders() {
-        List<Order> list = orderRepository.findAll();
-        return orderRepository.findAll();
+        try {
+            return orderRepository.findAll();
+        } catch (Exception e) {
+            System.err.println("Error al recuperar pedidos: " + e.getMessage());
+            return new ArrayList<>(); // Devuelve una lista vacía en caso de error
+        }
     }
 
 }

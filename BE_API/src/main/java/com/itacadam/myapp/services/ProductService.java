@@ -7,7 +7,7 @@ import com.itacadam.myapp.api.requests.ProductCreationRequest;
 import com.itacadam.myapp.models.Product;
 import com.itacadam.myapp.repository.ProductRepository;
 
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,7 +45,12 @@ public class ProductService {
     }
 
     public List<Product> getAllProducts() {
-        return productRepository.findAll();
+        try {
+            return productRepository.findAll();
+        } catch (Exception e) {
+            System.err.println("Error al recuperar productos: " + e.getMessage());
+            return new ArrayList<>(); // Devuelve una lista vacía en caso de error
+        }
     }
 
 }
