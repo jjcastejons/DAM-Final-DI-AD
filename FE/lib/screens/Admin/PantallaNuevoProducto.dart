@@ -5,6 +5,8 @@ import 'package:flutter_proyecto/providers/ProductoProvider.dart';
 import 'package:flutter_proyecto/utils/button_styles.dart';
 import 'package:flutter_proyecto/widgets/drawers.dart';
 import 'package:provider/provider.dart';
+
+import '../../utils/CameraGalleryService.dart';
 //import 'package:image_picker/image_picker.dart';
 
 class NuevoProducto extends StatefulWidget {
@@ -21,20 +23,15 @@ class _NuevoProductoState extends State<NuevoProducto> {
   final TextEditingController _stockController = TextEditingController();
   final TextEditingController _precioController = TextEditingController();
   File? _imagen; // Variable para almacenar la imagen seleccionada
+  String photoPath = "";
 
   // Método para seleccionar imagen
   Future<void> _seleccionarImagen() async {
-    /*
-    final ImagePicker picker = ImagePicker();
-    final File? imagenSeleccionada = await picker.pickImage(source: ImageSource.gallery);
-
-
-    if (imagenSeleccionada != null) {
-      setState(() {
-        _imagen = File(imagenSeleccionada.path);
-      });
-    }
-    */
+    final path = await CameraGalleryService().selectPhoto();
+    if (path == null) return;
+    setState(() {
+      photoPath = path;
+    });
   }
 
   // Método para guardar el producto
@@ -48,7 +45,7 @@ class _NuevoProductoState extends State<NuevoProducto> {
         nombre: _nombreController.text,
         descripcion: _descripcionController.text,
         //imagenPath: _imagen!.path,
-        imagenPath: "assets/images/logo.png",
+        imagenPath: photoPath,
         stock: int.parse(_stockController.text),
         precio: double.parse(_precioController.text),
       );
@@ -157,8 +154,8 @@ class _NuevoProductoState extends State<NuevoProducto> {
               Center(
                 child: Column(
                   children: [
-                    _imagen != null
-                        ? Image.file(_imagen!,
+                    photoPath != ""
+                        ? Image.network(photoPath,
                             height: 100, width: 100, fit: BoxFit.cover)
                         : const Icon(Icons.image,
                             size: 100, color: Colors.grey),

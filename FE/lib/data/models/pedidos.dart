@@ -45,7 +45,7 @@ class Pedidos {
   // Convierte un JSON a un objeto Pedidos
   factory Pedidos.fromJson(Map<String, dynamic> json) {
     return Pedidos(
-        numeroPedido: json['id'] ?? 0,
+        numeroPedido: json['numeroPedido'] ?? 0,
         descripcion: json['descripcion'] ?? '',
         precio: json['precio'] ?? 0.0,
         estado: json['estado'] ?? '',
@@ -55,7 +55,7 @@ class Pedidos {
   // Objeto Pedidos a JSON
   Map<String, dynamic> toJson() {
     return {
-      "id": numeroPedido,
+      "numeroPedido": numeroPedido,
       "descripcion": descripcion,
       "precio": precio,
       "estado": estado,

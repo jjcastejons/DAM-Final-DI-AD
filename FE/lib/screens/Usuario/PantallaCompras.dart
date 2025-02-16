@@ -133,76 +133,79 @@ class _PantallaComprasState extends State<PantallaCompras> {
 
   @override
   Widget build(BuildContext context) {
-    List<Productos> todosProductos = _productoProvider.productos;
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          const SizedBox(height: 20),
-          // Verificar si hay productos
-          todosProductos.isEmpty
-              ? const Center(
-                  child: Text("No se ha encontrado ningún producto."))
-              : Expanded(
-                  child: ListView.builder(
-                    itemCount: todosProductos.length,
-                    itemBuilder: (context, index) {
-                      if (!cantidades.containsKey(index)) {
-                        cantidades[index] = 0;
-                      }
-                      return Card(
-                        elevation: 4,
-                        margin: const EdgeInsets.symmetric(
-                            vertical: 8, horizontal: 16),
-                        child: ListTile(
-                          leading: Image.asset(
-                            todosProductos[index].getImagen(),
-                            width: 50,
-                            height: 50,
-                            fit: BoxFit.cover,
-                            errorBuilder: (context, error, stackTrace) =>
-                                const Icon(Icons.image, size: 50),
+    return Consumer<ProductoProvider>(
+        builder: (context, productoProvider, child) {
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            const SizedBox(height: 20),
+            // Verificar si hay productos
+            productoProvider.productos.isEmpty
+                ? const Center(
+                    child: Text("No se ha encontrado ningún producto."))
+                : Expanded(
+                    child: ListView.builder(
+                      itemCount: productoProvider.productos.length,
+                      itemBuilder: (context, index) {
+                        if (!cantidades.containsKey(index)) {
+                          cantidades[index] = 0;
+                        }
+                        return Card(
+                          elevation: 4,
+                          margin: const EdgeInsets.symmetric(
+                              vertical: 8, horizontal: 16),
+                          child: ListTile(
+                            leading: Image.network(
+                              productoProvider.productos[index].getImagen(),
+                              width: 50,
+                              height: 50,
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) =>
+                                  const Icon(Icons.image, size: 50),
+                            ),
+                            title: Text(
+                                productoProvider.productos[index].getNombre()),
+                            subtitle: Text(
+                                "Precio: ${productoProvider.productos[index].getPrecio()}\nStock: ${productoProvider.productos[index].getStock()}\n${productoProvider.productos[index].getDescripcion()}"),
+                            isThreeLine: true,
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                IconButton(
+                                  icon: const Icon(Icons.remove,
+                                      color: Colors.red),
+                                  onPressed: () {
+                                    _modificarCantidad(index, -1);
+                                  },
+                                ),
+                                Text("${cantidades[index]}",
+                                    style: TextStyle(fontSize: 18)),
+                                IconButton(
+                                  icon: const Icon(Icons.add,
+                                      color: Colors.green),
+                                  onPressed: () {
+                                    _modificarCantidad(index, 1);
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
-                          title: Text(todosProductos[index].getNombre()),
-                          subtitle: Text(
-                              "Precio: ${todosProductos[index].getPrecio()}\nStock: ${todosProductos[index].getStock()}\n${todosProductos[index].getDescripcion()}"),
-                          isThreeLine: true,
-                          trailing: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              IconButton(
-                                icon:
-                                    const Icon(Icons.remove, color: Colors.red),
-                                onPressed: () {
-                                  _modificarCantidad(index, -1);
-                                },
-                              ),
-                              Text("${cantidades[index]}",
-                                  style: TextStyle(fontSize: 18)),
-                              IconButton(
-                                icon:
-                                    const Icon(Icons.add, color: Colors.green),
-                                onPressed: () {
-                                  _modificarCantidad(index, 1);
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
+                        );
+                      },
+                    ),
                   ),
-                ),
-          const SizedBox(height: 20),
-          ElevatedButton.icon(
-              onPressed: () {
-                _realizarCompra();
-              },
-              icon: Icon(Icons.shopping_cart),
-              label: Text("Realizar compra")),
-          const SizedBox(height: 20),
-        ],
-      ),
-    );
+            const SizedBox(height: 20),
+            ElevatedButton.icon(
+                onPressed: () {
+                  _realizarCompra();
+                },
+                icon: Icon(Icons.shopping_cart),
+                label: Text("Realizar compra")),
+            const SizedBox(height: 20),
+          ],
+        ),
+      );
+    });
   }
 }
