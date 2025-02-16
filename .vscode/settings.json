@@ -1,3 +1,4 @@
 {
-    "cmake.sourceDirectory": "C:/Repos/EjemplosDAM/ProyectoADDI/DAMFinal/FE/windows/runner"
+    "cmake.sourceDirectory": "C:/Repos/EjemplosDAM/ProyectoADDI/DAMFinal/FE/windows/runner",
+    "java.configuration.updateBuildConfiguration": "interactive"
 }
