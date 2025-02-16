@@ -6,12 +6,13 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Launch Current File",
+            "name": "Run Backend",
             "request": "launch",
-            "mainClass": "${file}"
+            "mainClass": "com.itacadam.myapp.MyappApplication",
+            "projectName": "myapp"
         },
         {
-            "name": "FE (Flutter Chrome)",
+            "name": "Run FE (Chrome)",
             "program": "lib/main.dart",
             "cwd": "FE",
             "deviceId": "chrome",

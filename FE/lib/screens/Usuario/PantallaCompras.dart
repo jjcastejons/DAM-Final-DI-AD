@@ -2,11 +2,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_proyecto/data/models/pedidos.dart';
 import 'package:flutter_proyecto/data/models/productos.dart';
-import 'package:flutter_proyecto/data/repositories/ProductoRepository.dart';
 import 'package:flutter_proyecto/providers/PedidoProvider.dart';
+import 'package:flutter_proyecto/providers/ProductoProvider.dart';
 import 'package:provider/provider.dart';
-
-import '../../providers/ProductoProvider.dart';
 
 class PantallaCompras extends StatefulWidget {
   const PantallaCompras({super.key, required this.nombreUsuario});
@@ -21,7 +19,16 @@ class _PantallaComprasState extends State<PantallaCompras> {
   // Usamos un mapa para almacenar la cantidad seleccionada de cada producto.
   Map<int, int> cantidades = {};
   String _mensajeCompra = "";
-  final double _precioTotal = 0.0;
+  double _precioTotal = 0.0;
+  late PedidoProvider _pedidoProvider;
+  late ProductoProvider _productoProvider;
+
+  @override
+  void initState() {
+    super.initState();
+    _pedidoProvider = Provider.of<PedidoProvider>(context, listen: false);
+    _productoProvider = Provider.of<ProductoProvider>(context, listen: false);
+  }
 
   // Método para modificar la cantidad (aumentar o disminuir)
   void _modificarCantidad(int index, int cambio) {
@@ -37,11 +44,17 @@ class _PantallaComprasState extends State<PantallaCompras> {
   void _realizarCompra() {
     // Filtramos los productos que tienen cantidad mayor a 0
     List<String> productosComprados = [];
+
+    _precioTotal = 0.0;
     cantidades.forEach((index, cantidad) {
-      // if (cantidad > 0) {
-      //   productosComprados.add("${cantidad}x ${LogicaProductos.getListaProductos()[index].getNombre()}");
-      //   _precioTotal = cantidad * LogicaProductos.getListaProductos()[index].getPrecio();
-      // }
+      if (cantidad > 0) {
+        _productoProvider.productos[index]
+            .setStock(_productoProvider.productos[index].stock - cantidad);
+        productosComprados.add(
+            "${cantidad} x ${_productoProvider.productos[index].getNombre()}");
+        _precioTotal = _precioTotal +
+            (cantidad * _productoProvider.productos[index].getPrecio());
+      }
     });
 
     if (productosComprados.isEmpty) {
@@ -60,7 +73,7 @@ class _PantallaComprasState extends State<PantallaCompras> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text("Confirmar Compra"),
+          title: Text("Precio Total $_precioTotal"),
           content: Text(
               "Has seleccionado los siguientes productos:\n\n$_mensajeCompra"),
           actions: [
@@ -83,16 +96,27 @@ class _PantallaComprasState extends State<PantallaCompras> {
     );
   }
 
-  // TODO: Verificar que llamadas asíncronas funcionen correctamente.  Es muy probable que haya que trabajar con Consumer ya que no hay ningún await
   void _procesarCompra() {
-    final productoProvider =
-        Provider.of<ProductoProvider>(context, listen: false);
-    final pedidoProvider = Provider.of<PedidoProvider>(context, listen: false);
-    setState(() async {
+    // Crear un objeto User
+
+    PedidoProvider pedidoProvider =
+        Provider.of<PedidoProvider>(context, listen: false);
+
+    Pedidos pedido = Pedidos(
+      comprador: widget.nombreUsuario,
+      estado: "Pedido",
+      numeroPedido: Random().nextInt(10000),
+      precio: _precioTotal,
+      descripcion: _mensajeCompra,
+    );
+
+    pedidoProvider.addPedido(pedido);
+
+    setState(() {
       cantidades.forEach((index, cantidad) {
         if (cantidad > 0) {
           // Restamos el stock del producto comprado
-          Productos miProducto = productoProvider.productos[index];
+          Productos miProducto = _productoProvider.productos[index];
           miProducto.setStock(miProducto.stock - cantidad);
         }
       });
@@ -100,17 +124,6 @@ class _PantallaComprasState extends State<PantallaCompras> {
       // Reseteamos la selección de cantidades
       cantidades.clear();
     });
-
-    // Crear un objeto User
-    Pedidos pedido = Pedidos(
-      comprador: widget.nombreUsuario,
-      estado: "Pedidos",
-      numeroPedido: Random().nextInt(10000),
-      precio: _precioTotal,
-      descripcion: _mensajeCompra,
-    );
-
-    pedidoProvider.addPedido(pedido);
 
     // Mostrar mensaje de éxito
     ScaffoldMessenger.of(context).showSnackBar(
@@ -120,8 +133,7 @@ class _PantallaComprasState extends State<PantallaCompras> {
 
   @override
   Widget build(BuildContext context) {
-    List<Productos> todosProductos =
-        ProductoRepository().getListaProductos() as List<Productos>;
+    List<Productos> todosProductos = _productoProvider.productos;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -143,16 +155,14 @@ class _PantallaComprasState extends State<PantallaCompras> {
                         margin: const EdgeInsets.symmetric(
                             vertical: 8, horizontal: 16),
                         child: ListTile(
-                          /*
                           leading: Image.asset(
-                            todosProductos[index].getNombre(),
+                            todosProductos[index].getImagen(),
                             width: 50,
                             height: 50,
                             fit: BoxFit.cover,
-                            errorBuilder: (context, error, stackTrace) => 
-                              const Icon(Icons.image, size: 50),
+                            errorBuilder: (context, error, stackTrace) =>
+                                const Icon(Icons.image, size: 50),
                           ),
-                          */
                           title: Text(todosProductos[index].getNombre()),
                           subtitle: Text(
                               "Precio: ${todosProductos[index].getPrecio()}\nStock: ${todosProductos[index].getStock()}\n${todosProductos[index].getDescripcion()}"),
@@ -168,7 +178,7 @@ class _PantallaComprasState extends State<PantallaCompras> {
                                 },
                               ),
                               Text("${cantidades[index]}",
-                                  style: const TextStyle(fontSize: 18)),
+                                  style: TextStyle(fontSize: 18)),
                               IconButton(
                                 icon:
                                     const Icon(Icons.add, color: Colors.green),
@@ -188,8 +198,8 @@ class _PantallaComprasState extends State<PantallaCompras> {
               onPressed: () {
                 _realizarCompra();
               },
-              icon: const Icon(Icons.shopping_cart),
-              label: const Text("Realizar compra")),
+              icon: Icon(Icons.shopping_cart),
+              label: Text("Realizar compra")),
           const SizedBox(height: 20),
         ],
       ),

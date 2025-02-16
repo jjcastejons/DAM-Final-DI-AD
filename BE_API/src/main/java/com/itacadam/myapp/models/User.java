@@ -57,6 +57,10 @@ public class User {
         this.contrasena = contrasena;
     }
 
+    public String getContrasena() {
+        return contrasena;
+    }    
+
     public boolean getAdministrador() {
         return administrador;
     }
@@ -75,5 +79,7 @@ public class User {
 
     public User() {
     }
+
+
 
 }

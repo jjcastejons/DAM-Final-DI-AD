@@ -15,7 +15,7 @@ import java.util.Objects;
  */
 
 @Entity
-@Table(name = "ORDER")
+@Table(name = "ORDERS")
 public class Order {
 
     @Id
