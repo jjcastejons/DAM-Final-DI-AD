@@ -1,6 +1,8 @@
 package com.itacadam.myapp.services;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.itacadam.myapp.api.requests.ProductCreationRequest;
@@ -14,7 +16,7 @@ import java.util.Optional;
 
 @Service
 public class ProductService {
-
+    private static final Logger logger = LoggerFactory.getLogger(ProductService.class);
 
     private final ProductRepository productRepository;
 
@@ -48,7 +50,7 @@ public class ProductService {
         try {
             return productRepository.findAll();
         } catch (Exception e) {
-            System.err.println("Error al recuperar productos: " + e.getMessage());
+            logger.error("Error en listado de productos {}", e.getMessage());
             return new ArrayList<>(); // Devuelve una lista vacía en caso de error
         }
     }

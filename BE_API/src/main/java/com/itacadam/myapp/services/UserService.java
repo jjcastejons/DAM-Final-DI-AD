@@ -3,14 +3,19 @@ import org.springframework.stereotype.Service;
 import com.itacadam.myapp.api.requests.UserCreationRequest;
 import com.itacadam.myapp.models.User;
 import com.itacadam.myapp.repository.UserRepository;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 @Service
 public class UserService {
 
-
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
     private final UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {
@@ -41,7 +46,14 @@ public class UserService {
 
 
     public List<User> getAllUsers() {
-        return userRepository.findAll();
+        logger.info("Listado de usuarios");
+
+        try {
+            return userRepository.findAll();
+        } catch (Exception e) {
+            logger.error("Error en listado de usuarios {}", e);
+            return new ArrayList<>();
+        }       
     }
 
 }

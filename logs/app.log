@@ -1,0 +1,56 @@
+2025-02-16T16:21:17.879+01:00  INFO 5372 --- [myapp] [main] com.itacadam.myapp.MyappApplication      : Starting MyappApplication using Java 23.0.2 with PID 5372 (C:\Repos\EjemplosDAM\ProyectoADDI\DAMFinal\BE_API\target\classes started by luser in C:\Repos\EjemplosDAM\ProyectoADDI\DAMFinal)
+2025-02-16T16:21:17.881+01:00  INFO 5372 --- [myapp] [main] com.itacadam.myapp.MyappApplication      : No active profile set, falling back to 1 default profile: "default"
+2025-02-16T16:21:18.533+01:00  INFO 5372 --- [myapp] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-02-16T16:21:18.597+01:00  INFO 5372 --- [myapp] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 55 ms. Found 3 JPA repository interfaces.
+2025-02-16T16:21:19.170+01:00  INFO 5372 --- [myapp] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-02-16T16:21:19.187+01:00  INFO 5372 --- [myapp] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-02-16T16:21:19.188+01:00  INFO 5372 --- [myapp] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-02-16T16:21:19.262+01:00  INFO 5372 --- [myapp] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-02-16T16:21:19.263+01:00  INFO 5372 --- [myapp] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1324 ms
+2025-02-16T16:21:19.432+01:00  INFO 5372 --- [myapp] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-02-16T16:21:19.493+01:00  INFO 5372 --- [myapp] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.5.Final
+2025-02-16T16:21:19.527+01:00  INFO 5372 --- [myapp] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-02-16T16:21:19.801+01:00  INFO 5372 --- [myapp] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-02-16T16:21:19.830+01:00  INFO 5372 --- [myapp] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-02-16T16:21:20.169+01:00  INFO 5372 --- [myapp] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@77856cc5
+2025-02-16T16:21:20.172+01:00  INFO 5372 --- [myapp] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-02-16T16:21:20.215+01:00  WARN 5372 --- [myapp] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-02-16T16:21:20.217+01:00  WARN 5372 --- [myapp] [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-02-16T16:21:20.239+01:00  INFO 5372 --- [myapp] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-02-16T16:21:21.053+01:00  INFO 5372 --- [myapp] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-02-16T16:21:21.099+01:00  INFO 5372 --- [myapp] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-02-16T16:21:21.472+01:00  WARN 5372 --- [myapp] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-02-16T16:21:21.559+01:00 DEBUG 5372 --- [myapp] [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 14 mappings in 'requestMappingHandlerMapping'
+2025-02-16T16:21:21.638+01:00 DEBUG 5372 --- [myapp] [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2025-02-16T16:21:21.667+01:00 DEBUG 5372 --- [myapp] [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-02-16T16:21:21.711+01:00 DEBUG 5372 --- [myapp] [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-02-16T16:21:21.811+01:00  INFO 5372 --- [myapp] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-02-16T16:21:21.820+01:00  INFO 5372 --- [myapp] [main] com.itacadam.myapp.MyappApplication      : Started MyappApplication in 4.425 seconds (process running for 4.896)
+2025-02-16T16:23:19.747+01:00  INFO 5372 --- [myapp] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-02-16T16:23:19.747+01:00  INFO 5372 --- [myapp] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-02-16T16:23:19.748+01:00 DEBUG 5372 --- [myapp] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2025-02-16T16:23:19.749+01:00 DEBUG 5372 --- [myapp] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2025-02-16T16:23:19.749+01:00 DEBUG 5372 --- [myapp] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+2025-02-16T16:23:19.751+01:00 DEBUG 5372 --- [myapp] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@22bca04e
+2025-02-16T16:23:19.752+01:00 DEBUG 5372 --- [myapp] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@fef2768
+2025-02-16T16:23:19.752+01:00 DEBUG 5372 --- [myapp] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2025-02-16T16:23:19.753+01:00  INFO 5372 --- [myapp] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
+2025-02-16T16:23:19.763+01:00 DEBUG 5372 --- [myapp] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/api/v1/users/getall", parameters={}
+2025-02-16T16:23:19.775+01:00 DEBUG 5372 --- [myapp] [http-nio-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.itacadam.myapp.api.UserController#getAllUser()
+2025-02-16T16:23:19.808+01:00  INFO 5372 --- [myapp] [http-nio-8080-exec-1] c.itacadam.myapp.services.UserService    : Listado de usuarios
+2025-02-16T16:23:19.979+01:00 DEBUG 5372 --- [myapp] [http-nio-8080-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-02-16T16:23:19.981+01:00 DEBUG 5372 --- [myapp] [http-nio-8080-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Writing [[com.itacadam.myapp.models.User@84106843, com.itacadam.myapp.models.User@4fd81994]]
+2025-02-16T16:23:20.024+01:00 DEBUG 5372 --- [myapp] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2025-02-16T16:23:20.025+01:00 DEBUG 5372 --- [myapp] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/api/v1/users/getall", parameters={}
+2025-02-16T16:23:20.025+01:00 DEBUG 5372 --- [myapp] [http-nio-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.itacadam.myapp.api.UserController#getAllUser()
+2025-02-16T16:23:20.026+01:00  INFO 5372 --- [myapp] [http-nio-8080-exec-2] c.itacadam.myapp.services.UserService    : Listado de usuarios
+2025-02-16T16:23:20.035+01:00 DEBUG 5372 --- [myapp] [http-nio-8080-exec-2] m.m.a.RequestResponseBodyMethodProcessor : Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-02-16T16:23:20.036+01:00 DEBUG 5372 --- [myapp] [http-nio-8080-exec-2] m.m.a.RequestResponseBodyMethodProcessor : Writing [[com.itacadam.myapp.models.User@84106843, com.itacadam.myapp.models.User@4fd81994]]
+2025-02-16T16:23:20.038+01:00 DEBUG 5372 --- [myapp] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
